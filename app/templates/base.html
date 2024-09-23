@@ -1,0 +1,35 @@
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+
+<html>
+    <head>
+        {% if titre %}
+            <title>{{ titre }} - Petits gazouillis par Marilyn Diaz</title>
+        {% else %}
+            <title>Bienvenue sur petits gazouillis par Marilyn Diaz</title>
+        {% endif %}
+    <head>
+    <body>
+        <div>
+            Petits Gazouillis par Marilyn Diaz: 
+                <a href="{{ url_for('index') }}">Acceuil</a>
+                {% if current_user.is_anonymous %}
+                    <a href="{{ url_for('etablir_session') }}">Etablir une session</a>
+                {% else %}
+                    <a href="{{ url_for('utilisateur', nom=current_user.nom) }}">Profil</a>
+                    <a href="{{ url_for('logout') }}">Fin de la session</a>
+                {% endif %}
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>

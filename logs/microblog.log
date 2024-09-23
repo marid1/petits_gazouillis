@@ -1,0 +1,96 @@
+2024-09-13 13:47:27,113 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-13 13:48:44,311 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-13 13:48:58,628 ERROR: Exception on /editer_profil [POST] [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\flask\app.py:1744]
+Traceback (most recent call last):
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: utilisateur.nom
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\flask\app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\routes.py", line 97, in editer_profil
+    db.session.commit()
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: utilisateur.nom
+[SQL: UPDATE utilisateur SET nom=?, a_propos_de_moi=? WHERE utilisateur.id = ?]
+[parameters: ('Ron', 'Je suis Harry', 1)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-09-17 09:45:32,876 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-17 09:52:52,605 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-17 09:59:41,116 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-17 09:59:50,358 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-17 10:01:24,009 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-17 10:03:58,104 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-17 10:06:49,731 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]
+2024-09-17 10:08:39,620 INFO: Demarrage de Petits Gazouillis [in C:\Users\m.diaz\OneDrive - Cegep Gerald-Godin\P5C-GG\projets_python\petits_gazouillis\app\__init__.py:50]

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <tr valign="top">
+            <td><img src="{{ utilisateur.avatar }}"></td>
+            <td><h1>Utilisateur: {{ utilisateur.nom }}</h1></td>
+            {% if utilisateur.a_propos_de_moi %}<p>{{ utilisateur.a_propos_de_moi }}</p>{% endif %}
+            {% if utilisateur.dernier_acces %}<p>Vu pour la dernière fois le: {{ utilisateur.dernier_acces }}</p>{% endif %}
+            
+            <p>Je suis partisan de {{ utilisateur.les_partisans.count() }} utilisateur(s). Je suis suivi par {{ utilisateur.partisans.count() }} utilisateur(s).</p>
+
+            {% if utilisateur == current_user %}
+                <p><a href="{{ url_for('editer_profil') }}">Modifier votre profil</a></p>
+            {% elif not current_user.est_partisan(utilisateur) %}
+                <p>
+                    <form action="{{ url_for('suivre', nom=utilisateur.nom) }}" method="post">
+                        {{ formulaire.hidden_tag() }}
+                        {{ formulaire.soumettre(value='Suivre') }}
+                    </form>
+                </p>
+            {% else %}
+                <p>
+                    <form action="{{ url_for('ne_plus_suivre', nom=utilisateur.nom) }}" method="post">
+                        {{ formulaire.hidden_tag() }}
+                        {{ formulaire.soumettre(value='Ne plus suivre') }}
+                    </form>
+                </p>
+            {% endif %}
+        </tr>
+    </table>
+    <hr>
+    <table>
+        {% for p in publications %}
+            {% include '_publication.html' %}        
+        {% endfor %}
+    </table>
+{% endblock %}
