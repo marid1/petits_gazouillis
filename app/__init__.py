@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_seeder import FlaskSeeder
 from flask_login import LoginManager
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
@@ -12,6 +13,9 @@ app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+seeder = FlaskSeeder()
+seeder.init_app(app, db)
 
 etablir_session = LoginManager(app)
 etablir_session.login_view = 'etablir_session'
