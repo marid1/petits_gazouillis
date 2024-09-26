@@ -35,4 +35,10 @@
             {% include '_publication.html' %}        
         {% endfor %}
     </table>
+    {% if precedent %}
+        <a href="{{ precedent }}">Précedent</a>
+    {% endif %}
+    {% if suivant %}
+        <a href="{{ suivant }}">Suivant</a>
+    {% endif %}
 {% endblock %}

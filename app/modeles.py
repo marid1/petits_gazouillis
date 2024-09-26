@@ -1,6 +1,7 @@
 from datetime import UTC, datetime
 
 from flask_login import UserMixin
+from flask_sqlalchemy import query
 from app import db, etablir_session
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -31,32 +32,35 @@ class Utilisateur(UserMixin, db.Model):
         secondaryjoin=(partisans.c.utilisateur_qui_est_suivi_id == id),
         backref=db.backref('partisans', lazy='dynamic'), lazy='dynamic')
     
-    def devenir_partisan(self, utilisateur):
+    def devenir_partisan(self, utilisateur) -> None:
         if not self.est_partisan(utilisateur):
             print("ajouter partisan: {}".format(utilisateur.nom))
             self.les_partisans.append(utilisateur)
 
-    def ne_plus_etre_partisan(self, utilisateur):
+    def ne_plus_etre_partisan(self, utilisateur) -> None:
         if self.est_partisan(utilisateur):
             print("retirer partisan:: {}".format(utilisateur.nom))
             self.les_partisans.remove(utilisateur)
 
-    def est_partisan(self, utilisateur):
+    def est_partisan(self, utilisateur) -> bool:
         return self.les_partisans.filter(partisans.c.utilisateur_qui_est_suivi_id == utilisateur.id).count() > 0
 
-    def liste_publications_dont_je_suis_partisan(self):
-        publications_suivies = Publication.query.join(
-            partisans, (partisans.c.utilisateur_qui_est_suivi_id == Publication.utilisateur_id)).filter(partisans.c.partisan_id == self.id)
+    def liste_publications_dont_je_suis_partisan(self) -> query.Query:
+        publications_suivies = (Publication.query
+        .join(partisans, (partisans.c.utilisateur_qui_est_suivi_id == Publication.utilisateur_id))
+        .filter(partisans.c.partisan_id == self.id)
+        )
         mes_publications = Publication.query.filter_by(utilisateur_id=self.id)
-        return mes_publications.union(publications_suivies).order_by(Publication.horodatage.desc())
+        combined_query = mes_publications.union(publications_suivies).order_by(Publication.horodatage.desc())
+        return combined_query
 
     def __repr__(self) -> str:
         return '<Utilisateur {}>'.format(self.nom)
     
-    def enregister_mot_de_passe(self, mot_de_passe):
+    def enregister_mot_de_passe(self, mot_de_passe) -> None:
         self.mot_de_passe_hash = generate_password_hash(mot_de_passe)
 
-    def valider_mot_de_passe(self, mot_de_passe):
+    def valider_mot_de_passe(self, mot_de_passe) -> bool:
         return check_password_hash(self.mot_de_passe_hash, mot_de_passe)
     
 class Publication(db.Model):
@@ -68,7 +72,7 @@ class Publication(db.Model):
     def __repr__(self) -> str:
         return '<Publication {}>'.format(self.corps)
     
-def get_modele(modele, ligne, racine):
+def get_modele(modele, ligne, racine) -> Publication | Utilisateur | None:
     if modele == 'publication':
         id = int(ligne[0])
         corps = ligne[1].strip()
